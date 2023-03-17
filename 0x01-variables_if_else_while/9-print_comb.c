@@ -1,8 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - prints all single digit numbers of base 10 starting from 0,
- * followed by a new line, using putchar
+ * main - prints all possible combinations of single-digit numbers
  * Return: Always 0 (Success)
  */
 int main(void)
@@ -12,6 +11,11 @@ int main(void)
 	for (n = 48; n < 58; n++)
 	{
 		putchar(n);
+		if (n != 57)
+		{
+			putchar(',');
+			putchar(' ');
+																							}
 	}
 	putchar('\n');
 	return (0);
