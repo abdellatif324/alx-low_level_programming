@@ -1,15 +1,23 @@
-#include <stdio.h>
-#include <string.h>
+#include "main.h"
+
 /**
  * main - prints _putchar
- * Return: ALways 0 (Success)
+ *
+ * Description: prints _putchar
+ *
+ * Return: 0 (Success)
  */
+
 int main(void)
 {
-	char putch[50] = "_putchar"
-		for (int n = 0, i < strlen(putch), i++)
-		{
-			putchar(putch[i]);
-		}
+	char text[9] = "_putchar";
+	int i = 0;
+
+	for (i = 0; i < 8; i++)
+	{
+		_putchar(text[i]);
+	}
+	_putchar('\n');
+
 	return (0);
 }
