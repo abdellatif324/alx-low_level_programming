@@ -21,6 +21,5 @@ int print_alphabet_x10(void)
 		round++;
 		_putchar('\n');
 	}
-		_putchar('\n');
 		return (0);
 }
