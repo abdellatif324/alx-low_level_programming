@@ -1,7 +1,7 @@
 #include "main.h"
 /**
- * _isupper - uppercase letters
- * @c: char to check
+ * _isupper - check if numbers are 0 - 9
+ * @c: char to checked
  *
  * Return: 0 or 1
  */
