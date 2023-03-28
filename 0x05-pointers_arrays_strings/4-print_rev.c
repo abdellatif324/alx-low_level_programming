@@ -1,7 +1,8 @@
 #include "main.h"
+
 /**
- * _puts - prints strin backwarid
- * @str: string
+ * print_rev - prints string backwards
+ * @s: string
  * Return: void
  */
 
@@ -11,10 +12,10 @@ void print_rev(char *s)
 
 	while (s[i] != '\0')
 	{
-			i++;
+		i++;
 	}
 	while (i >= 0)
-	{	
+	{
 		_putchar(s[i]);
 		i--;
 	}
