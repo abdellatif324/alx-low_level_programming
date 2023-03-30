@@ -1,27 +1,27 @@
 #include "main.h"
 /**
- * _strncpy - copy a string
- * @dest: input value
- * @src: input value
- * @n: input value
+ * _strcmp - compares two strings
+ * int _strcmp (s1,s2)
+ *@s1 : pointer a s1
+ *@s2 : pointer a s2
+ * Return: 0 if s1 and s2 are equals,
  *
- * Return: dest
  */
-char *_strncpy(char *dest, char *src, int n)
+int _strcmp(char *s1, char *s2)
 {
-	int j;
+	int a;
 
-	j = 0;
-	while (j < n && src[j] != '\0')
-	{
-		dest[j] = src[j];
-		j++;
-	}
-	while (j < n)
-	{
-		dest[j] = '\0';
-		j++;
-	}
+	a = strcmp(s1, s2);
 
-	return (dest);
+	if (a == -1)
+	{
+		a = -15;
+		return (a);
+	}
+	else if (a == 1)
+	{
+		a = 15;
+		return (a);
+	}
+	return (a);
 }
