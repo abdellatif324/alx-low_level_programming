@@ -1,13 +1,13 @@
 #include <string.h>
 /**
  * _memset - that fills memory with a constant byte
- * @buffer: pointer
+ * @s: pointer
  * @b:value
  * @size:size initialiser
- * Return: Nothing.
+ * Return: s.
  */
-char *_memset(char *buffer, char b, unsigned int size)
+char *_memset(char *s, char b, unsigned int size)
 {
-		memset(buffer, b, size);
-		return (0);
+		memset(s, b, size);
+		return (s);
 }
