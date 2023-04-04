@@ -1,18 +1,24 @@
 #include "main.h"
-#include <stdio.h>
-
 /**
- * main - check the code
- *
- * Return: Always 0.
+ * _strstr - ntry point
+ * @haystack: input
+ * @needle: input
+ * Return: 0
  */
-int main(void)
+char *_strstr(char *haystack, char *needle)
 {
-    char *s = "hello, world";
-    char *f = "world";
-    char *t;
+	for (; *haystack != '\0'; haystack++)
+	{
+		char *i = haystack;
+		char *p = needle;
 
-    t = _strstr(s, f);
-    printf("%s\n", t);
-    return (0);
+		while (*i == *p && *p != '\0')
+		{
+			i++;
+			p++;
+		}
+		if (*p == '\0')
+			return (haystack);
+	}
+	return (0);
 }
