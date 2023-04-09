@@ -2,27 +2,35 @@
 #include <stdlib.h>
 #include <ctype.h>
 /**
- * main - that adds positive numbers
- *@argc: argument
- *@argv: argment vector
- *
- *Return: 1 If one of the number contains symbols that are not digits
-**/
+ * main - multiplies two numbers
+ * @argc: number of arguments
+ * a:convert string a number
+ * b:convert string a number
+ * @argv: array of arguments
+ * Return: 0 (Success), 1 (Error)
+ */
+
 int main(int argc, char *argv[])
 {
-	int i, j, num, som;
+	int a, b;
+	int total = 0;
 
-	for (i = 1; i < argc; i++)
-		for (j = 0; argv[i][j] != '\0'; j++)
+	for (a = 1; a < argc; a++)
+	{
+		char *arg = argv[a];
+
+		for (b = 0; arg[b] != '\0'; b++)
 		{
-			if (!isdigit(argv[i][j]))
+			if (!isdigit(arg[b]))
 			{
 				printf("Error\n");
 				return (1);
 			}
-			num = atoi(argv[i]);
-			som += num;
 		}
-	printf("%d\n", som);
+
+	total += atoi(arg);
+	}
+
+	printf("%d\n", total ? total : 0);
 	return (0);
 }
