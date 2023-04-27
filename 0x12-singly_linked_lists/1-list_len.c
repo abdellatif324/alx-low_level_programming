@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "lists.h"
 /**
- * print_list - that returns the number of elements in a linked list_t list
+ * list_len - that returns the number of elements in a linked list_t list
  * @h: pointer to list_t list
  * Return: the number of nodes printed
  */
