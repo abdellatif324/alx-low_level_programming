@@ -4,7 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+/**
+ * struct listint_s -singly linked list
+ * @n: integger
+ * @next: points to next node
+ */
 typedef struct listint_s
 {
 	int n;
