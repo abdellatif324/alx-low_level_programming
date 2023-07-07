@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * clear_bit -  that returns the number of bits
+ * flip_bits -  that returns the number of bits
  * @n: calculated using the function
  * @m: calculated using the function
  * Return: count
