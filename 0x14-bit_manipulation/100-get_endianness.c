@@ -8,5 +8,5 @@ int get_endianness(void)
 	unsigned int a = 1;
 	unsigned char *strin = (unsigned char *) &a;
 
-	return ((int)(*strin)i);
+	return ((int)(*strin));
 }
