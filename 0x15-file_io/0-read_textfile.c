@@ -28,12 +28,12 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (buffer == NULL)
 		return (0);
 
-	bytes = read(a, buffer, letters);
-	total = write(STDOUT_FILENO, buffer, bytes);
+	total = read(a, buffer, letters);
+	bytes = write(STDOUT_FILENO, buffer, total);
 
 	close(a);
 	free(buffer);
 
-	return (total);
+	return (bytes);
 }
 
