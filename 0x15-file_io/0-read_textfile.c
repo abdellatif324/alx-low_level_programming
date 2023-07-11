@@ -26,7 +26,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	bytes = read(a, buffer, letters);
 	totalLe = write(STDOUT_FILENO, buffer, bytes);
 
-	if (a == -1 || bytes == -1 || totalLe != bytes)
+	if (a == -1 || bytes == -1 || totalLe == -1 || totalLe != bytes)
 	{
 		free(buffer);
 		return (0);
