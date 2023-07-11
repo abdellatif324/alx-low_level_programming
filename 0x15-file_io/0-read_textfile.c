@@ -11,30 +11,29 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t totalLe, bytes;
-	int a;
+	ssize_t totalLe, bytes, a;
 	char *buffer;
 
 	if (filename == NULL)
 		return (0);
 
+	buffer = malloc(sizeof(char) * letters);
+
+	if (buffer == NULL)
+		return (0);
+
 	a = open(filename, O_RDONLY);
-
-	if (a == -1)
-		return (0);
-
-	buffer = malloc(sizeof(char) * (letters));
-	if (!buffer)
-	{
-		close(a);
-		return (0);
-	}
 	bytes = read(a, buffer, letters);
 	totalLe = write(STDOUT_FILENO, buffer, bytes);
 
-	close(a);
-	free(buffer);
+	if (a == -1 || bytes == -1 || totalLe != bytes)
+	{
+		free(buffer);
+		return (0);
+	}
 
+	free(buffer);
+	close(a);
 	return (totalLe);
 }
 
