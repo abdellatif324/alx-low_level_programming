@@ -1,77 +1,72 @@
+#include "main.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
 
-#define BUFFER_SIZE 64
-
-void error_exit(int code, const char *message)
+/**
+ * error_file - checks if files can be opened.
+ * @file_from: file_from.
+ * @file_to: file_to.
+ * @argv: arguments vector.
+ * Return: no return.
+ */
+void error_file(int file_from, int file_to, char *argv[])
 {
-    dprintf(STDERR_FILENO, "%s\n", message);
-    exit(code);
+	if (file_from == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
+	if (file_to == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
+	}
 }
 
-void print_elf_header(int fd)
+/**
+ * main - check the code for Holberton School students.
+ * @argc: number of arguments.
+ * @argv: arguments vector.
+ * Return: Always 0.
+ */
+int main(int argc, char *argv[])
 {
-    char buffer[BUFFER_SIZE];
-    ssize_t bytes_read;
-    int i;
+	int file_from, file_to, err_close;
+	ssize_t nchars, nwr;
+	char buf[1024];
 
-    /* Read ELF header */
-    bytes_read = read(fd, buffer, BUFFER_SIZE);
-    if (bytes_read == -1)
-        error_exit(98, "Error: Failed to read ELF header");
+	if (argc != 3)
+	{
+		dprintf(STDERR_FILENO, "%s\n", "Usage: cp file_from file_to");
+		exit(97);
+	}
 
-    /* Print ELF header information */
-    printf("ELF Header:\n");
-    printf("  Magic:   ");
-    for (i = 0; i < 16; i++)
-        printf("%02x ", (unsigned char)buffer[i]);
-    printf("\n");
-    printf("  Class:                             ELF%d\n", buffer[4] == 1 ? 32 : 64);
-    printf("  Data:                              %s\n", buffer[5] == 1 ? "2's complement, little endian" : "2's complement, big endian");
-    printf("  Version:                           %d (current)\n", buffer[6]);
-    printf("  OS/ABI:                            %s\n", buffer[7] == 0 ? "UNIX - System V" : "UNIX - NetBSD");
-    printf("  ABI Version:                       %d\n", buffer[8]);
-    printf("  Type:                              ");
-    switch (buffer[16])
-    {
-        case 1:
-            printf("REL (Relocatable file)\n");
-            break;
-        case 2:
-            printf("EXEC (Executable file)\n");
-            break;
-        case 3:
-            printf("DYN (Shared object file)\n");
-            break;
-        default:
-            printf("<unknown>\n");
-    }
-    printf("  Entry point address:               0x");
-    for (i = 0; i < 8; i++)
-        printf("%02x", (unsigned char)buffer[24 + i]);
-    printf("\n");
-}
+	file_from = open(argv[1], O_RDONLY);
+	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
+	error_file(file_from, file_to, argv);
 
-int main(int argc, char **argv)
-{
-    int fd;
+	nchars = 1024;
+	while (nchars == 1024)
+	{
+		nchars = read(file_from, buf, 1024);
+		if (nchars == -1)
+			error_file(-1, 0, argv);
+		nwr = write(file_to, buf, nchars);
+		if (nwr == -1)
+			error_file(0, -1, argv);
+	}
 
-    if (argc != 2)
-        error_exit(97, "Usage: elf_header elf_filename");
+	err_close = close(file_from);
+	if (err_close == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+		exit(100);
+	}
 
-    /* Open the ELF file */
-    fd = open(argv[1], O_RDONLY);
-    if (fd == -1)
-        error_exit(98, "Error: Failed to open ELF file");
-
-    /* Print ELF header */
-    print_elf_header(fd);
-
-    /* Close the file */
-    if (close(fd) == -1)
-        error_exit(100, "Error: Failed to close file");
-
-    return 0;
+	err_close = close(file_to);
+	if (err_close == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+		exit(100);
+	}
+	return (0);
 }
