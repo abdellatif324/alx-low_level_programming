@@ -13,7 +13,7 @@ void error_exit(int code, const char *message)
 	exit(code);
 }
 
-/*
+/**
  * main - check the code
  * @argc: number of arguments.
  * @argv: arguments vector
