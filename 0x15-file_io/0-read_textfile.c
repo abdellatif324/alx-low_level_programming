@@ -11,22 +11,37 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t a, total, bytes;
+	ssize_t a, total, bytes = 0;
 	char *buffer;
 
-	a = open(filename, O_RDONLY);
+	if (filename == NULL)
+		return (0);
 
+	a = open(filename, O_RDONLY);
 	if (a == -1)
 		return (0);
 
-	buffer = malloc(sizeof(char) * (letters));
-
+	buffer = malloc(sizeof(char) * (letters + 1));
 	if (buffer == NULL)
+	{
+		close(a);
 		return (0);
-
+	}
 	total = read(a, buffer, letters);
-	bytes = write(STDOUT_FILENO, buffer, total);
+	if (total == -1)
+	{
+		close(a);
+		free(buffer);
+		return (0);
+	}
 
+	buffer[total] = '\0';
+	if (bytes == -1 || bytes != total)
+	{
+		close(a);
+		free(buffer);
+		return (0);
+	}
 	close(a);
 	free(buffer);
 
