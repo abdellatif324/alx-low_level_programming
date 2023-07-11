@@ -1,16 +1,24 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include "main.h"
 
-#define BUFFER_SIZE 1024
-
+/**
+ * error_exit - check if can be open
+ * @code: code from
+ * @message: message
+ * Return: nothing.
+ */
 void error_exit(int code, const char *message)
 {
 	dprintf(STDERR_FILENO, "%s\n", message);
 	exit(code);
 }
 
+/*
+ * main - check the code
+ * @argc: number of arguments.
+ * @argv: arguments vector
+ * Return: always0
+ */
 int main(int argc, char **argv)
 {
 	int fd_from, fd_to;
