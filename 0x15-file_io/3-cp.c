@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "main.h"
-
+#define BUFFER_SIZE 1024
 /**
  * error_exit - check if can be open
  * @code: code from
