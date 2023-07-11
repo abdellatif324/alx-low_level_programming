@@ -11,40 +11,30 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t a, total, bytes = 0;
+	ssize_t totalLe, bytes;
+	int a;
 	char *buffer;
 
 	if (filename == NULL)
 		return (0);
 
 	a = open(filename, O_RDONLY);
+
 	if (a == -1)
 		return (0);
 
-	buffer = malloc(sizeof(char) * (letters + 1));
-	if (buffer == NULL)
+	buffer = malloc(sizeof(char) * (letters));
+	if (!buffer)
 	{
 		close(a);
 		return (0);
 	}
-	total = read(a, buffer, letters);
-	if (total == -1)
-	{
-		close(a);
-		free(buffer);
-		return (0);
-	}
+	bytes = read(a, buffer, letters);
+	totalLe = write(STDOUT_FILENO, buffer, bytes);
 
-	buffer[total] = '\0';
-	if (bytes == -1 || bytes != total)
-	{
-		close(a);
-		free(buffer);
-		return (0);
-	}
 	close(a);
 	free(buffer);
 
-	return (bytes);
+	return (totalLe);
 }
 
