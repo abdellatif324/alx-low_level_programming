@@ -15,7 +15,7 @@ int create_file(const char *filename, char *text_content)
 	int file_descriptor;
 	int number, bytes_read;
 
-	if (filename == NULL)
+	if (!filename)
 		return (-1);
 
 	file_descriptor = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0600);
@@ -25,6 +25,7 @@ int create_file(const char *filename, char *text_content)
 
 	if (!text_content)
 		text_content = "";
+
 	for (number = 0; text_content[number]; number++)
 		;
 
