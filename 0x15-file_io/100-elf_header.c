@@ -59,13 +59,10 @@ void print_elf_header(const Elf64_Ehdr *header)
 				break;
 	default:
 		printf("<unknown: %x>\n", header->e_ident[EI_OSABI]);
-		 break;
+		break;
 	}
-
 	printf("  ABI Version:\t%d\n", header->e_ident[EI_ABIVERSION]);
-
 	printf("  Type:\t\t0x%x\n", header->e_type);
-
 	printf("  Entry point address:\t0x%lx\n", header->e_entry);
 }
 
