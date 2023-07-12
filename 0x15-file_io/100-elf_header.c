@@ -4,11 +4,23 @@
 #include <stdlib.h>
 #include <elf.h>
 
+/**
+ * print_error - Prints error message
+ * @message: the error message printed
+ * Return: nothing
+ */
 void print_error(const char *message)
 {
 	printf("Error: %s\n", message);
 	exit(98);
 }
+
+/**
+ * print_elf_header - Prints the information contained in the ELF header.
+ * @header: pointer ELF header
+ *
+ * Return: nothing
+ */
 
 void print_elf_header(const Elf64_Ehdr *header)
 {
@@ -33,11 +45,21 @@ void print_elf_header(const Elf64_Ehdr *header)
 	printf("  OS/ABI:\t");
 	switch (header->e_ident[EI_OSABI])
 	{
-	case ELFOSABI_NONE: printf("UNIX - System V\n"); break;
-	case ELFOSABI_NETBSD: printf("UNIX - NetBSD\n"); break;
-	case ELFOSABI_LINUX: printf("UNIX - Linux\n"); break;
-	case ELFOSABI_SOLARIS: printf("UNIX - Solaris\n"); break;
-	default: printf("<unknown: %x>\n", header->e_ident[EI_OSABI]); break;
+	case ELFOSABI_NONE:
+				printf("UNIX - System V\n");
+				break;
+	case ELFOSABI_NETBSD:
+				printf("UNIX - NetBSD\n");
+				break;
+	case ELFOSABI_LINUX:
+				printf("UNIX - Linux\n");
+				break;
+	case ELFOSABI_SOLARIS:
+				printf("UNIX - Solaris\n");
+				break;
+	default:
+		printf("<unknown: %x>\n", header->e_ident[EI_OSABI]);
+		 break;
 	}
 
 	printf("  ABI Version:\t%d\n", header->e_ident[EI_ABIVERSION]);
@@ -47,6 +69,12 @@ void print_elf_header(const Elf64_Ehdr *header)
 	printf("  Entry point address:\t0x%lx\n", header->e_entry);
 }
 
+/**
+ * main - entry point the program
+ * @argc: number of commande line arguments
+ * @argv: array of string
+ * Return: 0 if success or 98 or error
+ */
 int main(int argc, char *argv[])
 {
 	int fd;
@@ -73,6 +101,6 @@ int main(int argc, char *argv[])
 	print_elf_header(&header);
 
 	close(fd);
-	return 0;
+	return (0);
 }
 
